@@ -40,7 +40,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CraftBayPlugin extends JavaPlugin {
-	private String tag = "[CraftBay]";
+	private String tag = "[Auction]";
 	private Economy economy;
         private ChatPlugin chatPlugin;
         private AuctionAnnouncer announcer;
@@ -123,28 +123,11 @@ public class CraftBayPlugin extends JavaPlugin {
         }
 
         private void setupChat() {
-                if (chatPlugin != null) chatPlugin.disable();
-                do {
-                        if (getConfig().getBoolean("herochat.enable")) {
-                                chatPlugin = new HeroChat(this);
-                                if (chatPlugin.enable(getConfig().getConfigurationSection("herochat"))) {
-                                        break;
-                                }
-                        } else if (getConfig().getBoolean("channelchat.enable")) {
-                                chatPlugin = new ChannelChat(this);
-                                if (chatPlugin.enable(getConfig().getConfigurationSection("channelchat"))) {
-                                        break;
-                                }
-                        }
-                        // if all fails, fall back to bukkit chat
-                        chatPlugin = new BukkitChat(this);
-                        chatPlugin.enable(getConfig().getConfigurationSection("defaultchat"));
-                        getLogger().info("Falling back to default chat");
-                } while (false);
+                chatPlugin = new BukkitChat(this);
+                chatPlugin.enable(getConfig().getConfigurationSection("defaultchat"));
         }
 
-	private Boolean setupEconomy()
-        {
+	private Boolean setupEconomy() {
                 RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
                 if (economyProvider != null) {
                         economy = economyProvider.getProvider();
