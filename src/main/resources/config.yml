@@ -38,15 +38,6 @@ debug: false
 defaultchat:
         # Are players listening by default?
         autojoin: true
-# Herochat configuration
-herochat:
-        enable: false
-        channel: Trade
-        password: ''
-# ChannelChat configuration
-channelchat:
-        enable: false
-        channel: Trade
 # Colors
 colors:
         default: dark_aqua
